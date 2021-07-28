@@ -22,6 +22,7 @@ class Post extends Migration
             $table->string('tag_id')->commit("文章標籤ID");
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

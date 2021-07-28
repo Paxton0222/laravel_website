@@ -35,18 +35,31 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         $this->configureRateLimiting();
 
         $this->routes(function () {
+            
+            /* original api methods
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
+            */
 
+            /* infyom api method */
+            Route::prefix('api')
+                ->middleware('api')
+                ->as('api.')
+                ->namespace($this->app->getNamespace().'Http\Controllers\API')
+                ->group(base_path('routes/api.php'));
+            
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        
     }
 
     /**
@@ -59,5 +72,18 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+
+    /**
+    * infyom add route perfix /api method
+    *
+    * @return void
+    */
+    protected function mapApiRoutes(){      
+        Route::prefix('api')
+        ->middleware('api')
+        ->as('api.')
+        ->namespace($this->app->getNamespace().'Http\Controllers\API')
+        ->group(base_path('routes/api.php'));
     }
 }

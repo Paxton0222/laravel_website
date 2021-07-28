@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreatepostAPIRequest;
 use App\Http\Requests\API\UpdatepostAPIRequest;
 use App\Models\post;
-use App\Repositories\postRepository;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -15,7 +15,7 @@ use Response;
  * @package App\Http\Controllers\API
  */
 
-class postAPIController extends AppBaseController
+class PostAPIController extends AppBaseController
 {
     /** @var  postRepository */
     private $postRepository;

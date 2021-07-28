@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatepostRequest;
 use App\Http\Requests\UpdatepostRequest;
-use App\Repositories\postRepository;
+use App\Repositories\PostRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;

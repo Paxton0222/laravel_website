@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    protected $namespace = "App\Http\Controllers";
 
     /**
      * The controller namespace for the application.
@@ -35,11 +36,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            
+
             /* original api methods
             Route::prefix('api')
                 ->middleware('api')
@@ -48,18 +49,18 @@ class RouteServiceProvider extends ServiceProvider
             */
 
             /* infyom api method */
-            Route::prefix('api')
+            Route::prefix('api/v1') /*v1 從這裡改*/
                 ->middleware('api')
                 ->as('api.')
                 ->namespace($this->app->getNamespace().'Http\Controllers\API')
                 ->group(base_path('routes/api.php'));
-            
+
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
 
-        
+
     }
 
     /**
@@ -79,11 +80,4 @@ class RouteServiceProvider extends ServiceProvider
     *
     * @return void
     */
-    protected function mapApiRoutes(){      
-        Route::prefix('api')
-        ->middleware('api')
-        ->as('api.')
-        ->namespace($this->app->getNamespace().'Http\Controllers\API')
-        ->group(base_path('routes/api.php'));
-    }
 }

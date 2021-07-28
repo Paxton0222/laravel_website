@@ -18,4 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('posts', 'PostAPIController');
+Route::resource('posts', App\Http\Controllers\API\PostAPIController::class);
+
+
+Route::resource('categories', App\Http\Controllers\API\categoryAPIController::class);
+
+
+Route::resource('tags', App\Http\Controllers\API\TagsAPIController::class);
